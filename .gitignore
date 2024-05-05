@@ -162,3 +162,4 @@ cython_debug/
 # CSV and JSON files
 *.csv
 *.json
+*.mapbox_token

@@ -1,11 +1,8 @@
 from arcgis.geocoding import geocode
 from arcgis.gis import GIS
 from pathlib import Path
-# import pandas as pd
-# import pipreqs.pipreqs as pr
+import pandas as pd
 import json
-
-# pr.main()
 
 fname = Path("source.csv").__str__()
 with open(fname, "r") as file:
@@ -14,8 +11,10 @@ with open(fname, "r") as file:
 # Create an anonymous GIS session
 gis = GIS()
 # Geocode the objects
-coded = [geocode(object)[0] for object in objects]
+data = [geocode(object, max_locations=5)[0] for object in objects]
 with open("res.json", "w") as file:
-    json.dump(coded, file, indent=4)
+    json.dump(data, file, indent=4)
 
-# print(coded)
+# print(data)
+
+df = pd.json_normalize(data)

@@ -10,10 +10,9 @@ with open("res.json", "r") as file:
 df = pd.json_normalize(data)
 
 # Create a scatter mapbox
-fig = px.scatter_mapbox(df, lat="location.y", lon="location.x", color="score", hover_name="attributes.ExInfo",
+fig = px.scatter_mapbox(df, lat="location.y", lon="location.x", color="distance", hover_name="attributes.ExInfo",
                         color_continuous_scale=px.colors.cyclical.IceFire, zoom=9)
 
-# Set the mapbox access token
 fig.update_layout(mapbox_style="open-street-map")
 
 # Create a Dash app

@@ -1,4 +1,4 @@
 *
-!*.py
+!src/*.py
 !requirements.txt
-!source.csv
+!data/source.txt

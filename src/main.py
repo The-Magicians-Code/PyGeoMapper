@@ -1,32 +1,60 @@
-from arcgis.geometry import Point, distance
-from arcgis.geocoding import geocode
-from arcgis.gis import GIS
-from pathlib import Path
+#!/usr/bin/env python3
+# @Author: Tanel Treuberg
+# @Github: https://github.com/The-Magicians-Code
+# @Description: Display location data on an interactive web map
+
+from dash import Dash, dcc, html
+from base64 import b64encode
+from process import process_and_prepare
+import plotly.express as px
 import pandas as pd
-import json
+import io
 
-fname = Path("source.csv").__str__()
-with open(fname, "r") as file:
-    objects = [line.rstrip() for line in file.readlines()]
+try:
+    df = pd.read_csv("../data/processed.csv")
+except:
+    print("File not existent! Proceeding with data processing, it will take time")
+    df = process_and_prepare("../data/source.txt", False)
 
-# Create an anonymous GIS session
-gis = GIS()
-# Geocode the objects
-# Out_fields malfunctioning?
-data = [geocode(object, max_locations=1)[0] for object in objects]
+# Create a scatter map
+fig = px.scatter_mapbox(df, lat="location.y", lon="location.x", color="distance", hover_name="attributes.ExInfo",
+    color_continuous_scale=px.colors.cyclical.IceFire, zoom=9, height=800, width=800, size="marker_size", size_max=15,
+    hover_data={
+        "marker_size": False
+    },
+    labels={
+        "location.x": "x",
+        "location.y": "y"
+    }, 
+    center={
+        "lat": df["location.y"].mean(),
+        "lon": df["location.x"].mean()
+    })
 
-# Veerenni being the zero point
-data[0]["distance"] = 0
-root = Point(data[0]["location"])
+# Add map style
+fig.update_layout(mapbox_style="open-street-map")
 
-for item in data[1:]:
-    item.update(distance(4326, root, Point(item["location"]), geodesic=True))
+# Create an html object and encode it
+buffer = io.StringIO()
+fig.write_html(buffer)
+html_bytes = buffer.getvalue().encode()
+encoded = b64encode(html_bytes).decode()
 
-with open("res.json", "w") as file:
-    json.dump(data, file, indent=4)
+# Create a Dash server
+app = Dash(__name__)
 
-# print(data)
+# Define the app layout
+app.layout = html.Div([
+    html.H2("Interactive map"),
+    dcc.Graph(figure=fig),
+    html.A(
+        html.Button("Download interactive map"),
+        id="download",
+        href=f"data:text/html;base64,{encoded}",
+        download="map.html"
+    )
+])
 
-df = pd.json_normalize(data)
-df = df[["address", "score", "distance", "location.x", "location.y", "attributes.ExInfo"]]
-print(df)
+# Run the app
+if __name__ == '__main__':
+    app.run(port=8061, host="0.0.0.0", debug=True)

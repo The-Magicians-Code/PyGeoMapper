@@ -1,5 +1,5 @@
 # PyGeoMapper
-Calculate the distance of multiple points from a primary coordinate and display results on a web interface with a downloadable map. The application is being developed and deployed in a Docker environment. This repository consists of development and production container scripts, source code within [/src](/src/) folder and relevant data source in [/data](/data/) folder
+Calculate the distance of multiple points from a primary coordinate and display results on a web interface with a downloadable map. The application is being developed and deployed in a Docker environment. This repository consists of development and production container scripts, source code within [/src](/src/) folder and relevant data source in [/data](/data/) folder. Example of an exported [interactive map](./interactive_map.html)
 >Current implementation is MVP! Project is in active development, see [issues](https://github.com/The-Magicians-Code/PyGeoMapper/issues)
 ## Configure and run
 Install [docker](https://docs.docker.com/get-docker/)  

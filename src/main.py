@@ -18,7 +18,7 @@ except:
 
 # Create a scatter map
 fig = px.scatter_mapbox(df, lat="location.y", lon="location.x", color="distance", hover_name="attributes.ExInfo",
-    color_continuous_scale=px.colors.cyclical.IceFire, zoom=9, height=800, width=800, size="marker_size", size_max=15,
+    color_continuous_scale=px.colors.cyclical.IceFire, zoom=8.8, height=800, width=800, size="marker_size", size_max=15,
     hover_data={
         "marker_size": False
     },

@@ -162,7 +162,5 @@ cython_debug/
 # MacOS DS_Store object
 .DS_Store
 
-# CSV and JSON files
-*.csv
-*.json
-*.mapbox_token
+data/res.json
+data/processed.csv

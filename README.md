@@ -12,7 +12,7 @@ docker ps
 ````
 Connect to the container terminal using the container name and desired terminal
 ````
-docker exec it container_name bash
+docker exec -it container_name bash
 ````
 Stop the container process
 ````

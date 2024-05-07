@@ -19,6 +19,5 @@ Stop the container process
 ````
 docker stop container_name
 ````
-
 Info on system compatability  
 >https://developers.arcgis.com/python/guide/system-requirements/

@@ -19,5 +19,8 @@ Stop the container process
 ````
 docker stop container_name
 ````
+### Notes
 Info on system compatability  
 >https://developers.arcgis.com/python/guide/system-requirements/
+
+Branch [`gh-pages`](https://github.com/The-Magicians-Code/PyGeoMapper/tree/gh-pages) is a copy of the main branch and used for hosting the [`map`](https://github.com/The-Magicians-Code/PyGeoMapper/index.html) file named with the required name of `index.html` on GitHub Pages

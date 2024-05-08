@@ -35,7 +35,6 @@ def process_and_prepare(filename: str, save: bool=True) -> pd.DataFrame:
     data = [geocode(object, max_locations=1)[0] for object in objects]
 
     # Veerenni being the root location and the first in the source file
-    # Marking distance as 0 and setting the coordinates as root
     data[0]["distance"] = 0
     root = Point(data[0]["location"])
 

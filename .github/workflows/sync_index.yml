@@ -5,7 +5,7 @@ on:
     branches:
       - main  # replace with the name of your default branch
     paths:
-      - 'index.html'  # replace with the path to your file
+      - index.html  # replace with the path to your file
 
 jobs:
   sync:

@@ -45,7 +45,6 @@ def process_and_prepare(filename: str, save: bool=True) -> pd.DataFrame:
 
     df = pd.json_normalize(data)
     df = df[["address", "score", "distance", "location.x", "location.y", "attributes.ExInfo"]]
-    df["marker_size"] = 10
 
     if save:
         df.to_csv("../data/processed.csv")

@@ -18,13 +18,13 @@ except:
 
 # Create a scatter map
 fig = px.scatter_mapbox(df, lat="location.y", lon="location.x", color="distance", hover_name="attributes.ExInfo",
-    color_continuous_scale=px.colors.sequential.matter, zoom=8.8, height=800, width=800, size="marker_size", size_max=15,
+    color_continuous_scale=px.colors.sequential.matter, zoom=8.8, height=800, width=800,
     hover_data={
         "marker_size": False
     },
     labels={
-        "location.x": "x",
-        "location.y": "y"
+        "location.x": "lon",
+        "location.y": "lat"
     }, 
     center={
         "lat": df["location.y"].mean(),
@@ -33,6 +33,8 @@ fig = px.scatter_mapbox(df, lat="location.y", lon="location.x", color="distance"
 
 # Add map style
 fig.update_layout(mapbox_style="open-street-map")
+
+fig.update_traces(marker={"size": 20})
 
 # Create an html object and encode it
 buffer = io.StringIO()
